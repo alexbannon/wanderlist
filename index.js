@@ -7,7 +7,7 @@ var User = Connection.models.User;
 var userId;
 var pg = require('pg');
 
-pg.connect(process.env.wanderlist, function(err, client) {
+pg.connect(process.env.wander-list, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
