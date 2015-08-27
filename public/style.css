@@ -241,7 +241,7 @@ input.descrip{
 }*/
 
 /*media queries*/
-@media (max-width: 825px) {
+@media (max-width: 830px) {
     .navbar-header {
         float: none;
     }
