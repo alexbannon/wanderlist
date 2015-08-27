@@ -1,5 +1,5 @@
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize("postgres:///wanderlist");
+var sequelize = new Sequelize("postgres:///wander-list");
 var User = sequelize.import("../models/user");
 var Pin = sequelize.import("../models/pin");
 var Photo = sequelize.import("../models/photo");
@@ -18,4 +18,5 @@ module.exports = {
     Pin: Pin,
     User: User
   }
+  // ?ssl=true
 }
