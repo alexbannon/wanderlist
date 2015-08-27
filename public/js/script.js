@@ -260,7 +260,7 @@ $(document).ready(function() {
         })
         function makeAjaxPatchRequest(pinId, value){
           $.ajax({
-            url: "http://localhost:3000/pins/"+pinId,
+            url: "/pins/"+pinId,
             type: "PATCH",
             dataType: "json",
             data: {"title": value}
@@ -283,7 +283,7 @@ $(document).ready(function() {
               var edited_value = $(".editbox").val()
               var title_or_description = $(self).parent().attr("class");
               $.ajax({
-                url: "http://localhost:3000/users/1/pins/"+pinId,
+                url: "/users/1/pins/"+pinId,
                 type: "PATCH",
                 dataType: "json",
                 data: {title_or_description: edited_value}
@@ -307,7 +307,7 @@ $(document).ready(function() {
           var isRed = true;
           var description = $(".description").children().eq(0).val()
           $.ajax({
-            url: "http://localhost:3000/pins/" + pinId,
+            url: "/pins/" + pinId,
             type: "DELETE",
             dataType: "json",
             data: {"title": title, "latitude": latitude, "longitude": longitude, "userId": userId, "isRed": isRed, "description": description}
@@ -441,7 +441,7 @@ $(document).ready(function() {
     console.log(description)
     Pin.whichUser().then(function(userId){
       $.ajax({
-        url: "http://localhost:3000/users/"+userId+"/pins",
+        url: "/users/"+userId+"/pins",
         type: "POST",
         dataType: "json",
         data: {"title": title, "latitude": latitude, "longitude": longitude, "userId": userId, "isRed": isRed, "description": description}

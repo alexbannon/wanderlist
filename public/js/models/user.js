@@ -4,7 +4,7 @@ var User = function(user_info){
 };
 
 User.fetch = function(){
-  var request = $.getJSON("http://localhost:3000/users")
+  var request = $.getJSON("/users")
   .then(function(response) {
     var users = [];
     for(var i = 0; i < response.length; i++){
