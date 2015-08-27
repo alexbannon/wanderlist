@@ -7,23 +7,23 @@ var User = Connection.models.User;
 var userId;
 var pg = require('pg');
 
-pg.connect(process.env.wanderlist, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
-
-  client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
-});
-function sessionCleanup() {
-    sessionStore.all(function(err, sessions) {
-        for (var i = 0; i < sessions.length; i++) {
-            sessionStore.get(sessions[i], function() {} );
-        }
-    });
-}
+// pg.connect(process.env.wanderlist, function(err, client) {
+//   if (err) throw err;
+//   console.log('Connected to postgres! Getting schemas...');
+//
+//   client
+//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+// });
+// function sessionCleanup() {
+//     sessionStore.all(function(err, sessions) {
+//         for (var i = 0; i < sessions.length; i++) {
+//             sessionStore.get(sessions[i], function() {} );
+//         }
+//     });
+// }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
