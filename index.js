@@ -17,6 +17,13 @@ pg.connect(process.env.wanderlist, function(err, client) {
       console.log(JSON.stringify(row));
     });
 });
+function sessionCleanup() {
+    sessionStore.all(function(err, sessions) {
+        for (var i = 0; i < sessions.length; i++) {
+            sessionStore.get(sessions[i], function() {} );
+        }
+    });
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
