@@ -509,4 +509,17 @@ $(document).ready(function() {
       })
     })
   })
+
+  $("#add-description-button").on("click", function(e){
+    e.preventDefault();
+    console.log("i've been clicked");
+    var newParDescription = $(".form-control").val();
+    console.log(newParDescription);
+    $(".taskDescription").append("</br>");
+    $(".taskDescription").append(newParDescription);
+    $(".form-control").val("");
+  })
+
+
+
 })
