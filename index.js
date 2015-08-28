@@ -2,35 +2,13 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var path = require("path");
+
 var Connection = require("./db/connection");
 var User = Connection.models.User;
 var userId;
 var pg = require('pg');
-var database = "postgres://budmwiqnpvqnip:gVkTr55OmVVf5yLrPn5rzu-j1C@ec2-54-83-43-118.compute-1.amazonaws.com:5432/d4u4ll9rt2eafk";
+// var database = "";
 
-
-
-
-
-
-
-// pg.connect(process.env.database, function(err, client) {
-//   if (err) throw err;
-//   console.log('Connected to postgres! Getting schemas...');
-//
-//   client
-//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
-//     .on('row', function(row) {
-//       console.log(JSON.stringify(row));
-//     });
-// });
-// function sessionCleanup() {
-//     sessionStore.all(function(err, sessions) {
-//         for (var i = 0; i < sessions.length; i++) {
-//             sessionStore.get(sessions[i], function() {} );
-//         }
-//     });
-// }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,16 +1,16 @@
 var Sequelize = require("sequelize");
-// var sequelize = new Sequelize("postgres:///wanderlist");
-if (process.env.DATABASE_URL) {
-  sequelieze = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    logging: true //false
-  });
-  else {
-    sequelieze = new Sequelieze("postgres:///wanderlist");
-  }
-}
 
+if (process.env.DATABASE_URL) {
+  // the application is executed on Heroku ... use the postgres database
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect:  'postgres',
+    protocol: 'postgres',
+    logging:  true //false
+  });
+} else {
+  // the application is executed on the local machine
+  sequelize = new Sequelize("postgres:///wanderlist");
+}
 
 var User = sequelize.import("../models/user");
 var Pin = sequelize.import("../models/pin");
