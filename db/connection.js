@@ -12,9 +12,9 @@ var db_connection = new Sequelize(process.env.DATABASE_URL || "postgres:///wande
 //   sequelize = new Sequelize("postgres:///wanderlist");
 // }
 
-var User = sequelize.import("../models/user");
-var Pin = sequelize.import("../models/pin");
-var Photo = sequelize.import("../models/photo");
+var User = db_connection.import("../models/user");
+var Pin = db_connection.import("../models/pin");
+var Photo = db_connection.import("../models/photo");
 
 Photo.belongsTo(Pin);
 Pin.belongsTo(User);
@@ -24,7 +24,7 @@ User.hasMany(Pin);
 
 module.exports = {
   sql: Sequelize,
-  do: sequelize,
+  do: db_connection,
   models: {
     Photo: Photo,
     Pin: Pin,
