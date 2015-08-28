@@ -46,4 +46,10 @@ router.delete("/pins/:pinId/photos/:id", function(req, res){
   });
 });
 
+router.get("/photos/:id", function(req, res){
+  Photo.findById(req.params.id).then(function(photo){
+    res.json(photo);
+  })
+})
+
 module.exports = router;

@@ -48,12 +48,16 @@ Pin.fetch = function(userId){
   return request;
   console.log(pins)
 }
+
 Pin.show = function(userId, pinId){
   var request = $.getJSON("/users/"+userId+"/pins/"+pinId)
+
+// Pin.show = function(pinId){
+//   var request = $.getJSON("http://localhost:3000/pins/"+pinId)
   .then(function(response) {
     return response
   }).fail(function(response){
-    console.log("failed to fetch pins from user with id: "+userId);
+    console.log("failed to fetch pins with id: "+pinId);
   })
   return request;
 }

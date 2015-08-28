@@ -221,7 +221,7 @@ input.descrip{
   height: 28px;
   /*float: left;*/
 }
-.saveButton {
+.saveButton, .deletePhotButton {
   width: 3em;
   border-radius: 20px;
   border: 1px solid green;
