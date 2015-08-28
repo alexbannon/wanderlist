@@ -6,7 +6,7 @@ if (process.env.DATABASE_URL) {
     dialect:  'postgres',
     protocol: 'postgres',
     logging:  true //false
-  });
+  })
 } else {
   // the application is executed on the local machine
   sequelize = new Sequelize("postgres:///wanderlist");
