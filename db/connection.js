@@ -1,5 +1,17 @@
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize("postgres:///wander-list");
+// var sequelize = new Sequelize("postgres:///wanderlist");
+if (process.env.DATABASE_URL) {
+  sequelieze = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    logging: true //false
+  });
+  else {
+    sequelieze = new Sequelieze("postgres:///wanderlist");
+  }
+}
+
+
 var User = sequelize.import("../models/user");
 var Pin = sequelize.import("../models/pin");
 var Photo = sequelize.import("../models/photo");

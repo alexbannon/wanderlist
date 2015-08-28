@@ -7,6 +7,13 @@ var User = Connection.models.User;
 var userId;
 var pg = require('pg');
 var database = "postgres://budmwiqnpvqnip:gVkTr55OmVVf5yLrPn5rzu-j1C@ec2-54-83-43-118.compute-1.amazonaws.com:5432/d4u4ll9rt2eafk";
+
+
+
+
+
+
+
 // pg.connect(process.env.database, function(err, client) {
 //   if (err) throw err;
 //   console.log('Connected to postgres! Getting schemas...');
@@ -38,16 +45,26 @@ app.use("/", usersController);
 app.use("/", pinsController);
 app.use("/", photosController);
 
+app.set('port', (process.env.PORT || 3000));
+app.listen(app.get('port'), function(){
+  console.log("listening on port 3000")
+});
+
 var passport = require("passport");
 var TwitterStrategy = require("passport-twitter").Strategy;
-var fs = require("fs")
-if (fs.existsSync("./env.js")){
-  console.log("yes")
-  var env = require("./env");
-}
-else {
-  var env = process.env;
-}
+
+
+//does this work for heroku?
+// var fs = require("fs")
+// if (fs.existsSync("./env.js")){
+//   console.log("yes")
+//   var env = require("./env");
+// }
+// else {
+//   var env = process.env;
+// }
+
+
 passport.use(new TwitterStrategy(
   {
     consumerKey: env.twitterConsumerKey,

@@ -7,6 +7,8 @@ var Pin = function(info){
   this.isRed = info.isRed;
   this.description = info.description;
 };
+
+
 Pin.whichUser = function(){
   var request = $.getJSON("/auth/twitter/show")
   .then(function(response){

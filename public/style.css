@@ -127,7 +127,7 @@ html, body{
 
 .title {
   text-align: center;
-  font-size: 2em;
+  font-size: 1em;
   padding-top: .5em;
   font: bold "Lucida Grande";
 }
@@ -142,7 +142,14 @@ html, body{
   z-index: -1;
   top: 80%;
   box-shadow: 0 15px 10px #777;
+  /*position: relative;*/
+}
 
+.glyphicon-remove {
+   /*position: absolute;*/
+   top: 2px;
+   right: 2px;
+   /*z-index: 100;*/
 }
 
 .titleBox {
@@ -179,12 +186,6 @@ html, body{
   display: inline-block;
   position: absolute;
 }
-
-/*#edit-button {
-  margin-top: 25pt;
-}*/
-
-
 
 /*Before a new photo is added*/
 .changeUrlBar {
