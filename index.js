@@ -1,3 +1,12 @@
+var fs = require("fs")
+if (fs.existsSync("./env.js")){
+  console.log("yes")
+  var env = require("./env");
+}
+else {
+  var env = process.env;
+}
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -18,7 +27,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
       console.log(JSON.stringify(row));
     });
 });
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,14 +51,6 @@ var TwitterStrategy = require("passport-twitter").Strategy;
 
 
 //does this work for heroku?
-// var fs = require("fs")
-// if (fs.existsSync("./env.js")){
-//   console.log("yes")
-//   var env = require("./env");
-// }
-// else {
-//   var env = process.env;
-// }
 
 
 passport.use(new TwitterStrategy(
