@@ -144,14 +144,28 @@ html, body{
   box-shadow: 0 15px 10px #777;
 
 }
-.description {
-  text-align: center;
-  font-size: 1.2em;
-  margin: 3em .25em 0 2em;
-  width: 350px;
-  height: 200px;
-  border: 1px solid #999999;
-  padding: 5px;
+
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+    margin-top: 20px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
 }
 .photos {
   position: relative;

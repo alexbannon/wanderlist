@@ -82,6 +82,8 @@ $(document).ready(function() {
     alert("your link is www.wanderlistforever.com/OG")
   });
 
+  //
+
   // red and green pin variables
 
   var redPin = L.icon({
