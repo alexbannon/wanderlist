@@ -1,3 +1,5 @@
+// Lots of opportunities for refactoring here (e.g., repeat jQuery selectors, similar AJAX calls)
+
 $(document).ready(function(){
   //hide sidebar and save
   $(".leaflet-tile-pane").on("click", savePinAndHide)

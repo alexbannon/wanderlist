@@ -1,3 +1,6 @@
+// AM: When I first tried to run the app locally, I got an error saying that I was missing a consumer key / env.js file.
+// AM: Which is okay, but should let users know about that in your readme.
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -56,6 +59,8 @@ app.listen(process.env.PORT || 3000, function(){
 var passport = require("passport");
 var TwitterStrategy = require("passport-twitter").Strategy;
 
+// +1 using env.js
+
 passport.use(new TwitterStrategy(
   {
     consumerKey: env.twitterConsumerKey,
@@ -99,9 +104,6 @@ app.get("/auth/twitter/login", passport.authenticate("twitter"));
 app.get("/auth/twitter/callback",
   passport.authenticate("twitter", { failureRedirect: "/login" }),
   function(req, res) {
-    // console.log(req.session)
-    // console.log(req.session.passport.user.id)
-    // console.log("HELLLLLOOOOOOOOOO")
     console.log("------------------------------------------------")
     console.log("req.session.passport.user.id: "+req.session.passport.user.id)
     console.log("------------------------------------------------")
