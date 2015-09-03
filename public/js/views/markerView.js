@@ -1,5 +1,6 @@
 //this page renders the markers to be sent to mapview render marker
 
+// AM: Nice! Liking this system.
 
 var MarkerView = function(pin){
   //define pin images

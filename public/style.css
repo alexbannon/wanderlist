@@ -1,3 +1,9 @@
+/*
+  AM: Would suggest sectioning your stylesheet using comments so it's easier to reference different sections of your site.
+  AM: Overall, CSS looks good though.
+  AM: Doesn't look like the drop-down "hamburger" menu in the mobile version of your app works.
+*/
+
 * {
   box-sizing: border-box;
 }
