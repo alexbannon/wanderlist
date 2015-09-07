@@ -92,6 +92,8 @@ Pin.newPin = function(){
   data["longitude"] = current_longitude;
   data["isRed"] = pinIsRed;
   data["description"] = $(".description").val()
+  data["userId"] = current_user
+  console.log(data)
   $.ajax({
     //current user defined on page load off oauth
     url: "/users/"+current_user+"/pins",
@@ -99,7 +101,7 @@ Pin.newPin = function(){
     dataType: "json",
     data: data
   }).done(function(response){
-    $(".saveButton").hide;
+    $(".saveButton").hide();
     $(".title").html(response.title);
     $(".description").html(response.description);
     //save popup information for newly created pin
