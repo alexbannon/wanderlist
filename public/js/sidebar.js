@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  
   //hide sidebar and save
   $(".leaflet-tile-pane").on("click", savePinAndHide)
 
