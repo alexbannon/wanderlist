@@ -22,6 +22,7 @@ Pin.whichUser = function(){
   })
   return request
 }
+
 Pin.fetch = function(userId){
   var request = $.getJSON("/auth/twitter/show")
   .then(function(response){
@@ -50,6 +51,7 @@ Pin.fetch = function(userId){
   })
   return request;
 }
+
 Pin.getInfo = function(pinId){
   var request = $.getJSON("/pins/"+pinId)
   .then(function(response) {
@@ -59,12 +61,40 @@ Pin.getInfo = function(pinId){
   })
   return request;
 }
+
 Pin.getPhotos = function(pinId){
   var request = $.getJSON("/pins/"+pinId+"/photos/")
   .then(function(response) {
     return response
   }).fail(function(response){
     console.log("failed to fetch photos from pin with id: "+pinId);
+  })
+  return request;
+}
+
+Pin.savePin = function(pinId, data){
+  var request = "/pins/"+pinId
+  $.ajax({
+    url: request,
+    type: "PATCH",
+    dataType: "json",
+    data: data
+  }).done(function(response){
+    return response
+  });
+  return request;
+}
+
+Pin.deletePin = function(pinId){
+  var request = "/pins/"+pinId
+  $.ajax({
+    url: request,
+    type: "DELETE",
+    dataType: "json"
+  }).done(function(response){
+    $(".popup_bar").hide();
+    whichPin.hide();
+    return response;
   })
   return request;
 }

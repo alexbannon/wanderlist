@@ -1,29 +1,30 @@
 $(document).ready(function(){
   //hide sidebar and save
   $(".leaflet-tile-pane").on("click", savePinAndHide)
+
   function savePinAndHide() {
+    //prevent blank title saves
     if($(".editTitle").val() == ""){
       return
     }
+    //in case sidebar actually wasn't showing
     if($(".popup_bar").css("display") == "none"){
       return
     }
+
     var data = {}
-    var checkId = $("#pinId").html()
-    var notes = $(".editbox").val();
-    $.ajax({
-      url: "/pins/"+checkId,
-      type: "PATCH",
-      dataType: "json",
-      data: {"description": notes}
-    }).done(function(response){
-    })
-    var temp = event.target.title.split(" id")
-    pinId = temp[1]
-    var pict = $(".changeUrl").val();
-    if(pict){
-      postNewPhoto(pinId, pict)
+    var pinId = $("#pinId").html()
+    var description = $(".editbox").val();
+    data["description"] = description;
+    //find data whether title is being edited or not
+    if($(".editTitle").length > 0){
+      var title = $(".editTitle").val();
     }
+    else{
+      var title = $(".clickable_title").html();
+    }
+    data["title"] = title
+    Pin.savePin(pinId, data)
     $(".popup_bar").hide();
   }
 
@@ -32,10 +33,22 @@ $(document).ready(function(){
     whichPin = $(event.target);
     var temp = event.target.title.split(" id")
     var pinId = temp[1]
-    console.log(event.target.title)
+    //store id in hidden div for later ajax call
+    $(".hiddenInfo").html("<span id='pinId'>"+pinId+"</span>")
+
     var sidebarView = new SidebarView(pinId)
     sidebarView.render()
+
+    $(".glyphicon-trash").on("click", function(){
+      Pin.deletePin(pinId, whichPin)
+    })
+
+    showAndRenderPhotos()
+  }
+
+  function showAndRenderPhotos(){
     // new PhotoView(pinId, 1)
+
   }
   // function showAndRenderSidebar(){
   //   $(".popup_bar").show();
