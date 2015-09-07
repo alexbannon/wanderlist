@@ -8,6 +8,8 @@ Pin.whichUser().then(function(userId){
   $(".popup_bar").hide();
   $(".saveButton").hide();
   $(".deletePhotoButton").hide();
+  
+  //temporarily hiding overlay on load
   $(".overlay").hide();
   $(".help_window").hide();
 
@@ -21,6 +23,10 @@ Pin.whichUser().then(function(userId){
     $(".overlay").hide();
     $(".help_window").hide();
   });
+
+  $(".map_container").click(function(){
+    $(".help-message").hide();
+  })
 
   //fetch pins from user defined by session with default of 1 if no session
 
