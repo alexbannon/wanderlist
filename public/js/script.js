@@ -8,6 +8,9 @@ Pin.whichUser().then(function(userId){
   $(".popup_bar").hide();
   $(".saveButton").hide();
   $(".deletePhotoButton").hide();
+  $(".overlay").hide();
+  $(".help_window").hide();
+
 
   var pinId;
 
