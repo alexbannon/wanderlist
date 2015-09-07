@@ -87,12 +87,12 @@ Pin.whichUser().then(function(userId){
     current_latitude = 13.5333;
     current_longitude = 2.0833;
     WorldMap.map.setView([current_latitude, 50], 2)
-    var sidebar = new SidebarView(pin.id)
-    sidebar.render();
+    var sidebarView = new SidebarView(pin.id)
+    sidebarView.render();
     $(".glyphicon-trash").on("click", function(){
-      $(markerView.marker._icon).hide()
+      $(markerView.marker._icon).hide();
       $(".popup_bar").hide();
-    })
+    });
   });
   $("#greenPinBtn").click(function() {
     var pin = new Pin({"isRed": "false"})
@@ -102,12 +102,12 @@ Pin.whichUser().then(function(userId){
     current_latitude = 13.5333;
     current_longitude = 2.0833;
     WorldMap.map.setView([current_latitude, 50], 2)
-    var sidebar = new SidebarView(pin.id)
-    sidebar.render();
+    var sidebarView = new SidebarView(pin.id)
+    sidebarView.render();
     $(".glyphicon-trash").on("click", function(){
-      $(markerView.marker._icon).hide()
+      $(markerView.marker._icon).hide();
       $(".popup_bar").hide();
-    })
+    });
   });
 
 })

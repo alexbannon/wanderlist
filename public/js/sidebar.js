@@ -17,6 +17,7 @@ $(document).ready(function(){
     var pinId = $("#pinId").html()
     // when new pin, don't send ajax call without save
     if (!pinId) {
+
       return
     }
 
@@ -39,17 +40,26 @@ $(document).ready(function(){
     whichPin = $(event.target);
     var temp = event.target.title.split(" id")
     var pinId = temp[1]
-    //store id in hidden div for later ajax call
-    $(".hiddenInfo").html("<span id='pinId'>"+pinId+"</span>")
 
     var sidebarView = new SidebarView(pinId)
     sidebarView.render()
+    console.log(pinId)
 
-    $(".glyphicon-trash").on("click", function(){
-      Pin.deletePin(pinId, whichPin)
-    })
+    //for non-new pins, add trash and render photos
+    if(pinId != "?"){
+      $(".glyphicon-trash").on("click", function(){
+        Pin.deletePin(pinId, whichPin)
+        $(".popup_bar").hide();
+      })
 
-    showAndRenderPhotos()
+      showAndRenderPhotos()
+    }
+    else {
+      $(".glyphicon-trash").on("click", function(){
+        whichPin.hide();
+        $(".popup_bar").hide();
+      })
+    }
   }
 
   function showAndRenderPhotos(){

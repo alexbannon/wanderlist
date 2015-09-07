@@ -6,24 +6,22 @@ SidebarView.prototype = {
   render: function() {
     $(".popup_bar").show();
     if(this.pinId == "?"){
-      $(".popup_bar").show();
+      $(".hiddenInfo").empty();
       $(".saveButton").show()
       $(".photos").html("<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>'")
       $(".title").html("<input type='text' placeholder='New Pin'>");
       $(".description").val("What is on the agenda?")
     }
     else{
+      //add id to hidden div for later retrieval
+      $(".hiddenInfo").html("<span id='pinId'>"+this.pinId+"</span>")
+
       Pin.getInfo(this.pinId).then(function(response){
-        $(".clickable_title").html(response.title);
+        //input title and description into sidebar
+        $(".title").html("<span class='clickable_title'>"+response.title+"</span>")
         $(".description").val(response.description);
+
       })
     }
-  },
-
-  closeSidebar: function() {
-    var title = $(".title").html()
-
-    $(".popup_bar").hide();
-
   }
 }
