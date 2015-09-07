@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+  //this page deals with the loading and total functionality
+  //that is included in the popup sidebar
+
   //hide sidebar and save
   $(".leaflet-tile-pane").on("click", savePinAndHide)
 
@@ -17,7 +20,7 @@ $(document).ready(function(){
     var pinId = $("#pinId").html()
     // when new pin, don't send ajax call without save
     if (!pinId) {
-
+      $(".popup_bar").hide();
       return
     }
 
@@ -52,7 +55,7 @@ $(document).ready(function(){
         $(".popup_bar").hide();
       })
 
-      showAndRenderPhotos()
+      showAndRenderPhotos(pinId)
     }
     else {
       $(".glyphicon-trash").on("click", function(){
@@ -62,7 +65,10 @@ $(document).ready(function(){
     }
   }
 
-  function showAndRenderPhotos(){
+  function showAndRenderPhotos(pinId){
+    var photoListView = new PhotoListView()
+    photoListView.renderAll(pinId);
+    $(".photos").html(photoListView.views[0])
     // new PhotoView(pinId, 1)
 
   }

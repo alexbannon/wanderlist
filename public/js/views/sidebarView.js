@@ -5,6 +5,7 @@ var SidebarView = function(pinId){
 SidebarView.prototype = {
   render: function() {
     $(".popup_bar").show();
+
     if(this.pinId == "?"){
       $(".hiddenInfo").empty();
       $(".saveButton").show()
@@ -12,10 +13,14 @@ SidebarView.prototype = {
       $(".title").html("<input type='text' placeholder='New Pin'>");
       $(".description").val("What is on the agenda?")
     }
+
     else{
       //add id to hidden div for later retrieval
       $(".hiddenInfo").html("<span id='pinId'>"+this.pinId+"</span>")
 
+      //reset normal sidebar view
+      $(".saveButton").hide()
+      
       Pin.getInfo(this.pinId).then(function(response){
         //input title and description into sidebar
         $(".title").html("<span class='clickable_title'>"+response.title+"</span>")

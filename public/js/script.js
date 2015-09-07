@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+//this page loads pins, the functionality for the nav bar pins, and search bar
+
+
 //define current_user variable through ajax
 Pin.whichUser().then(function(userId){
   current_user = userId;

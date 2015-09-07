@@ -1,9 +1,5 @@
-var PhotoView = function(pinId, photoId){
+var PhotoView = function(data){
   var self = this;
-  $.getJSON("/pins/"+pinId+"/photos/"+photoId)
-  .done(function(response){
-    self.photoUrl = response.photoUrl;
-    self.pinId = response.pinId;
-    $("#one_photo").attr("src", self.photoUrl);
-  })
+  this.photoUrl = data.photoUrl;
+  this.html = "<img id='one_photo' src='"+this.photoUrl+"'>"
 }
