@@ -7,8 +7,9 @@ SidebarView.prototype = {
     $(".popup_bar").show();
 
     if(this.pinId == "?"){
-      $(".hiddenInfo").empty();
       $(".saveButton").show()
+      $(".next_arrow").hide();
+      $(".previous_arrow").hide();
       $(".photos").html("<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>")
       $(".title").html("<input type='text' placeholder='New Pin'>");
       $(".description").val("What is on the agenda?")

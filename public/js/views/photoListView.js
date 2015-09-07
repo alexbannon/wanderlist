@@ -27,6 +27,8 @@ PhotoListView.prototype = {
 
   renderOne: function(number){
     var self = this;
+    console.log(self.views)
+    console.log(number)
     $(".photos").html(self.views[number].html)
     //for icebox: dropdown on each page to edit/delete photo
     $("#currentPhotoId").html(self.views[number].photoId)
