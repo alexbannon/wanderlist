@@ -3,6 +3,8 @@ var PhotoListView = function(){
   this.views = [];
   this.blankImage = "<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>"
   this.pinId;
+  $(".hiddenInfo").append("<span id='nextNumber'></span>")
+  $(".hiddenInfo").append("<span id='previousNumber'></span>")
 }
 
 PhotoListView.prototype = {
@@ -30,14 +32,14 @@ PhotoListView.prototype = {
     }
     else {
       $(".next_arrow").show()
-      $(".next_arrow").attr("class", "next_arrow "+(number+1))
+      $("#nextNumber").html((number+1));
     }
     if (number == 0) {
       $(".previous_arrow").hide();
     }
     else {
       $(".previous_arrow").show();
-      $(".next_arrow").attr("class", "next_arrow "+(number-1))
+      $("#previousNumber").html((number-1));
     }
     return number
   }

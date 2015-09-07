@@ -7,6 +7,8 @@ $(document).ready(function(){
   $(".leaflet-tile-pane").on("click", savePinAndHide)
 
   function savePinAndHide() {
+    $(".next_arrow").unbind();
+    $(".previous_arrow").unbind();
     //prevent blank title saves
     if($(".editTitle").val() == ""){
       return
@@ -40,6 +42,8 @@ $(document).ready(function(){
 
   //show sidebar
   function showAndRenderSidebar(){
+    $(".next_arrow").unbind();
+    $(".previous_arrow").unbind();
     whichPin = $(event.target);
     var temp = event.target.title.split(" id")
     var pinId = temp[1]
@@ -67,15 +71,21 @@ $(document).ready(function(){
   function showAndRenderPhotos(pinId){
     var photoListView = new PhotoListView()
     photoListView.renderAll(pinId).done(function(response){
-      // next index of array of photos stored in class on arrow button
-      var nextNumber = $(".next_arrow").attr("class").split(" ")[1]
-      var previousNumber = $(".previous_arrow").attr("class").split(" ")[1]
-      $(".next_arrow").on("click", function(){
+      // next and prev index of array of photos stored in hidden div
+      $(".next_arrow").on("click", renderNextPhoto)
+      $(".previous_arrow").on("click", renderPreviousPhoto)
+      function renderNextPhoto(){
+        var nextNumber = parseInt($("#nextNumber").html())
         photoListView.renderOne(nextNumber)
-      })
-      $(".previous_arrow").on("click", function() {
+        $(".next_arrow").off("click", renderNextPhoto)
+        $(".next_arrow").on("click", renderNextPhoto)
+      }
+      function renderPreviousPhoto(){
+        var previousNumber = parseInt($("#previousNumber").html())
         photoListView.renderOne(previousNumber)
-      })
+        $(".previous_arrow").off("click", renderPreviousPhoto)
+        $(".previous_arrow").on("click", renderPreviousPhoto)
+      }
     })
     // new PhotoView(pinId, 1)
 
