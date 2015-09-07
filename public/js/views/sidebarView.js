@@ -16,7 +16,7 @@ SidebarView.prototype = {
 
     else{
       //add id to hidden div for later retrieval
-      $(".hiddenInfo").html("<span id='pinId'>"+this.pinId+"</span>")
+      $("#pinId").html(this.pinId)
 
       //reset normal sidebar view
       $(".saveButton").hide()

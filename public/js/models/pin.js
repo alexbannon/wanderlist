@@ -85,6 +85,33 @@ Pin.savePin = function(pinId, data){
   return request;
 }
 
+Pin.newPin = function(){
+  var data = {};
+  data["title"] = $(".title").children().eq(0).val()
+  data["latitude"] = current_latitude;
+  data["longitude"] = current_longitude;
+  data["isRed"] = pinIsRed;
+  data["description"] = $(".description").val()
+  $.ajax({
+    //current user defined on page load off oauth
+    url: "/users/"+current_user+"/pins",
+    type: "POST",
+    dataType: "json",
+    data: data
+  }).done(function(response){
+    $(".saveButton").hide;
+    $(".title").html(response.title);
+    $(".description").html(response.description);
+    //save popup information for newly created pin
+    whichPin[0].title = response.title + " id"+response.id
+    var pinId = response.id;
+    var pict = $(".changeUrl").val();
+    if (pict != ""){
+      //post new photo
+    }
+  })
+}
+
 Pin.deletePin = function(pinId){
   var request = "/pins/"+pinId
   $.ajax({

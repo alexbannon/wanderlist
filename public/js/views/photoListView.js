@@ -1,10 +1,11 @@
 var PhotoListView = function(){
   this.$el = $(".photos");
   this.views = [];
-  this.blankImage = "<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>"
+  this.blankImage = {
+    html: "<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>",
+    photoId: null
+  };
   this.pinId;
-  $(".hiddenInfo").append("<span id='nextNumber'></span>")
-  $(".hiddenInfo").append("<span id='previousNumber'></span>")
 }
 
 PhotoListView.prototype = {
@@ -14,7 +15,7 @@ PhotoListView.prototype = {
     var request = $.getJSON("/pins/"+pinId+"/photos").then(function(response){
       response.forEach(function(photo){
         var view = new PhotoView(photo)
-        self.views.push(view.html);
+        self.views.push(view);
       })
       self.views.push(self.blankImage)
     }).then(function(response){
@@ -26,7 +27,10 @@ PhotoListView.prototype = {
 
   renderOne: function(number){
     var self = this;
-    $(".photos").html(self.views[number])
+    $(".photos").html(self.views[number].html)
+    //for icebox: dropdown on each page to edit/delete photo
+    $("#currentPhotoId").html(self.views[number].photoId)
+
     if (parseInt(number) == (self.views.length - 1)){
       $(".next_arrow").hide();
     }

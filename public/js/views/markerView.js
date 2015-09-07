@@ -34,9 +34,3 @@ var MarkerView = function(pin){
   }
 
 }
-
-MarkerView.prototype = {
-  render: function() {
-
-  }
-}
