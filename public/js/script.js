@@ -24,6 +24,12 @@ Pin.whichUser().then(function(userId){
   Pin.fetch().then(function(pins){
     pins.forEach(function(pin){
       var marker = new MarkerView(pin);
+      if( marker.pin.isRed == "t"){
+        WorldMap.renderMarker(marker)
+      }
+      else{
+        WorldMap.renderGreenMarker(marker)
+      }
       //WorldMap.renderMarker(marker)
       // WorldMap.renderMarker(view.marker)
     })
