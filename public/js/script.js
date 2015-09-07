@@ -29,15 +29,6 @@ Pin.whichUser().then(function(userId){
     })
   })
 
-  // fix mapbox's glitchy height property - can't set 100% for some reason in css
-
-  $('#map').css("height", ($(window).height() - 50));
-  $(window).on("resize", resize);
-  resize();
-  function resize(){
-    $('#map').css("height", ($(window).height()) - 50);
-  }
-
   //  add search bar functionality to add red pin
 
   $(".search_bar").on("keypress", function(e){
