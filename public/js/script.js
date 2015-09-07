@@ -24,7 +24,7 @@ Pin.whichUser().then(function(userId){
   Pin.fetch().then(function(pins){
     pins.forEach(function(pin){
       var marker = new MarkerView(pin);
-      WorldMap.renderMarker(marker)
+      //WorldMap.renderMarker(marker)
       // WorldMap.renderMarker(view.marker)
     })
   })
@@ -77,7 +77,7 @@ Pin.whichUser().then(function(userId){
     var pin = new Pin({})
     var marker = new MarkerView(pin);
     pinIsRed = "t";
-    WorldMap.renderMarker(marker)
+    WorldMap.renderMarker(marker);
     current_latitude = 13.5333;
     current_longitude = 2.0833;
     WorldMap.map.setView([current_latitude, 50], 2)
@@ -87,7 +87,7 @@ Pin.whichUser().then(function(userId){
   $("#greenPinBtn").click(function() {
     var pin = new Pin({"isRed": "false"})
     var marker = new MarkerView(pin);
-    WorldMap.renderMarker(marker)
+    WorldMap.renderGreenMarker(marker);
     pinIsRed = "f";
     current_latitude = 13.5333;
     current_longitude = 2.0833;
