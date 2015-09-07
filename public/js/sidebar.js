@@ -46,7 +46,6 @@ $(document).ready(function(){
 
     var sidebarView = new SidebarView(pinId)
     sidebarView.render()
-    console.log(pinId)
 
     //for non-new pins, add trash and render photos
     if(pinId != "?"){
@@ -67,8 +66,17 @@ $(document).ready(function(){
 
   function showAndRenderPhotos(pinId){
     var photoListView = new PhotoListView()
-    photoListView.renderAll(pinId);
-    $(".photos").html(photoListView.views[0])
+    photoListView.renderAll(pinId).done(function(response){
+      // next index of array of photos stored in class on arrow button
+      var nextNumber = $(".next_arrow").attr("class").split(" ")[1]
+      var previousNumber = $(".previous_arrow").attr("class").split(" ")[1]
+      $(".next_arrow").on("click", function(){
+        photoListView.renderOne(nextNumber)
+      })
+      $(".previous_arrow").on("click", function() {
+        photoListView.renderOne(previousNumber)
+      })
+    })
     // new PhotoView(pinId, 1)
 
   }
