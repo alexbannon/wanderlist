@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  
+
   //hide sidebar and save
   $(".leaflet-tile-pane").on("click", savePinAndHide)
 
@@ -15,6 +15,11 @@ $(document).ready(function(){
 
     var data = {}
     var pinId = $("#pinId").html()
+    // when new pin, don't send ajax call without save
+    if (!pinId) {
+      return
+    }
+
     var description = $(".editbox").val();
     data["description"] = description;
     //find data whether title is being edited or not

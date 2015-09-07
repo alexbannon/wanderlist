@@ -8,7 +8,7 @@ Pin.whichUser().then(function(userId){
   $(".popup_bar").hide();
   $(".saveButton").hide();
   $(".deletePhotoButton").hide();
-  
+
   //temporarily hiding overlay on load
   $(".overlay").hide();
   $(".help_window").hide();
@@ -81,25 +81,33 @@ Pin.whichUser().then(function(userId){
 
   $("#redPinBtn").click(function(){
     var pin = new Pin({})
-    var marker = new MarkerView(pin);
+    var markerView = new MarkerView(pin);
     pinIsRed = "t";
-    WorldMap.renderMarker(marker);
+    WorldMap.renderMarker(markerView);
     current_latitude = 13.5333;
     current_longitude = 2.0833;
     WorldMap.map.setView([current_latitude, 50], 2)
     var sidebar = new SidebarView(pin.id)
     sidebar.render();
+    $(".glyphicon-trash").on("click", function(){
+      $(markerView.marker._icon).hide()
+      $(".popup_bar").hide();
+    })
   });
   $("#greenPinBtn").click(function() {
     var pin = new Pin({"isRed": "false"})
-    var marker = new MarkerView(pin);
-    WorldMap.renderGreenMarker(marker);
+    var markerView = new MarkerView(pin);
+    WorldMap.renderGreenMarker(markerView);
     pinIsRed = "f";
     current_latitude = 13.5333;
     current_longitude = 2.0833;
     WorldMap.map.setView([current_latitude, 50], 2)
     var sidebar = new SidebarView(pin.id)
     sidebar.render();
+    $(".glyphicon-trash").on("click", function(){
+      $(markerView.marker._icon).hide()
+      $(".popup_bar").hide();
+    })
   });
 
 })
