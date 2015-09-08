@@ -8,7 +8,7 @@ $(document).ready(function(){
   $(".my-account").on("click", function(){
     $(".account-information").toggle();
   });
-  
+
   //exiting account information
   $("#exit-button").on("click", function(){
     $(".account-information").toggle();
