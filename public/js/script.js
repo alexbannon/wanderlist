@@ -18,7 +18,6 @@ Pin.whichUser().then(function(userId){
 
   $(".popup_bar").hide();
   $(".saveButton").hide();
-  $(".deletePhotoButton").hide();
 
   //temporarily hiding overlay on load
   $(".overlay").hide();
