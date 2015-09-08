@@ -35,6 +35,12 @@ PhotoListView.prototype = {
 
     if (parseInt(number) == (self.views.length - 1)){
       $(".next_arrow").hide();
+      $(".changeUrl").on("keypress", function(e){
+        if(e.which == 13){
+          var newPhotoUrl = $(".changeUrl").val();
+          self.addPhoto(newPhotoUrl, number);
+        }
+      })
     }
     else {
       $(".next_arrow").show()
@@ -48,6 +54,28 @@ PhotoListView.prototype = {
       $("#previousNumber").html((number-1));
     }
     return number
+  },
+
+  addPhoto: function(photoUrl, number){
+    var self = this;
+    console.log(photoUrl)
+    $.ajax({
+      url: "/pins/"+self.pinId+"/photos",
+      type: "POST",
+      dataType: "json",
+      data: {
+        photoUrl: photoUrl,
+        pinId: self.pinId
+      }
+    }).done(function(response){
+      var view = new PhotoView(response)
+      self.views.pop()
+      self.views.push(view)
+      self.views.push(self.blankImage)
+      $(".next_arrow").show()
+      $("#nextNumber").html((number+1));
+      $(".photos").html(view.html)
+    })
   }
 
 }
