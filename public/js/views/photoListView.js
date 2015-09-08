@@ -2,7 +2,7 @@ var PhotoListView = function(){
   this.$el = $(".photos");
   this.views = [];
   this.blankImage = {
-    html: "<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='Enter Photo URL' class='changeUrl'></div>",
+    html: "<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='To Add Photo: Copy URL, Hit Enter' class='changeUrl'></div>",
     photoId: null
   };
   this.pinId;

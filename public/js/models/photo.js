@@ -24,7 +24,7 @@ Photo.savePhotos = function(listView, pinId){
           pinId: pinId
         }
       }).done(function(response){
-        console.log(response)
+        return
       })
     })
   }
