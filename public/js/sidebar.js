@@ -134,6 +134,7 @@ $(document).ready(function(){
     Pin.newPin().then(function(response){
       $("#pinId").html(response.id)
       Photo.savePhotos(App.photoListView, response.id)
+      showAndRenderPhotos(response.id)
     })
   })
 
