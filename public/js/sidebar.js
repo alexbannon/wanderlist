@@ -24,7 +24,8 @@ $(document).ready(function(){
     var pinId = $("#pinId").html()
     // when new pin, don't send ajax call without save
     if (!pinId) {
-      $(".popup_bar").hide();
+      // look here if old pins stop rendering right
+      // $(".popup_bar").hide();
       return
     }
     Pin.getLatLong(pinId)
@@ -70,8 +71,6 @@ $(document).ready(function(){
         Pin.deletePin(pinId, whichPin)
         $(".popup_bar").hide();
       })
-
-      showAndRenderPhotos(pinId)
     }
     else {
       $(".glyphicon-trash").one("click", function(){
@@ -79,11 +78,13 @@ $(document).ready(function(){
         $(".popup_bar").hide();
       })
     }
+    showAndRenderPhotos(pinId)
+
   }
 
   function showAndRenderPhotos(pinId){
-    var photoListView = new PhotoListView()
-    photoListView.renderAll(pinId).done(function(response){
+    App.photoListView = new PhotoListView()
+    App.photoListView.renderAll(pinId).done(function(response){
       // next and prev index of array of photos stored in hidden div
       $(".next_arrow").on("click", renderNextPhoto)
       $(".previous_arrow").on("click", renderPreviousPhoto)
@@ -91,13 +92,13 @@ $(document).ready(function(){
       $(".clickable_title").one("click", switchTitle);
       function renderNextPhoto(){
         var nextNumber = parseInt($("#nextNumber").html())
-        photoListView.renderOne(nextNumber)
+        App.photoListView.renderOne(nextNumber)
         $(".next_arrow").off("click", renderNextPhoto)
         $(".next_arrow").on("click", renderNextPhoto)
       }
       function renderPreviousPhoto(){
         var previousNumber = parseInt($("#previousNumber").html())
-        photoListView.renderOne(previousNumber)
+        App.photoListView.renderOne(previousNumber)
         $(".previous_arrow").off("click", renderPreviousPhoto)
         $(".previous_arrow").on("click", renderPreviousPhoto)
       }
@@ -130,7 +131,10 @@ $(document).ready(function(){
 
   //save new pin
   $(".saveButton").on("click", function() {
-    Pin.newPin();
+    Pin.newPin().then(function(response){
+      $("#pinId").html(response.id)
+      Photo.savePhotos(App.photoListView, response.id)
+    })
   })
 
 })

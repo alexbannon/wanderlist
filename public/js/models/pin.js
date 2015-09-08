@@ -94,7 +94,7 @@ Pin.newPin = function(){
   data["description"] = $(".description").val()
   data["userId"] = App.current_user
   console.log(data)
-  $.ajax({
+  var request = $.ajax({
     //current user defined on page load off oauth
     url: "/users/"+App.current_user+"/pins",
     type: "POST",
@@ -107,11 +107,9 @@ Pin.newPin = function(){
     //save popup information for newly created pin
     whichPin[0].title = response.title + " id"+response.id
     var pinId = response.id;
-    var pict = $(".changeUrl").val();
-    if (pict != ""){
-      //post new photo
-    }
+    return response
   })
+  return request
 }
 
 Pin.deletePin = function(pinId){

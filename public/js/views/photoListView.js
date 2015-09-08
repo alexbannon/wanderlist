@@ -11,17 +11,24 @@ var PhotoListView = function(){
 PhotoListView.prototype = {
   renderAll: function(pinId) {
     var self = this;
-    self.pinId = pinId;
-    var request = $.getJSON("/pins/"+pinId+"/photos").then(function(response){
-      response.forEach(function(photo){
-        var view = new PhotoView(photo)
-        self.views.push(view);
-      })
+    if(pinId == "?"){
       self.views.push(self.blankImage)
-    }).then(function(response){
       var number = self.renderOne(0)
-      return number
-    })
+      var request = $.getJSON("/pins")
+    }
+    else {
+      self.pinId = pinId;
+      var request = $.getJSON("/pins/"+pinId+"/photos").then(function(response){
+        response.forEach(function(photo){
+          var view = new PhotoView(photo)
+          self.views.push(view);
+        })
+        self.views.push(self.blankImage)
+      }).then(function(response){
+        var number = self.renderOne(0)
+        return number
+      })
+    }
     return request;
   },
 
@@ -38,7 +45,12 @@ PhotoListView.prototype = {
       $(".changeUrl").on("keypress", function(e){
         if(e.which == 13){
           var newPhotoUrl = $(".changeUrl").val();
-          self.addPhoto(newPhotoUrl, number);
+          if(self.pinId){
+            self.addPhoto(newPhotoUrl, number);
+          }
+          else{
+            self.addPhotoToNewPin(newPhotoUrl, number);
+          }
         }
       })
     }
@@ -76,6 +88,20 @@ PhotoListView.prototype = {
       $("#nextNumber").html((number+1));
       $(".photos").html(view.html)
     })
+  },
+
+  addPhotoToNewPin: function(photoUrl, number){
+    var self = this;
+    var view = {
+      html: "<img id='one_photo' src='"+photoUrl+"'>",
+      photoUrl: photoUrl
+    }
+    self.views.pop()
+    self.views.push(view)
+    self.views.push(self.blankImage)
+    $(".next_arrow").show()
+    $("#nextNumber").html((number+1));
+    $(".photos").html(view.html)
   }
 
 }

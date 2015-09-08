@@ -7,7 +7,8 @@ App = {
   Markers: [],
   current_latitude: null,
   current_longitude: null,
-  current_user: null
+  current_user: null,
+  photoListView: null
 }
 
 //define current_user variable through ajax
