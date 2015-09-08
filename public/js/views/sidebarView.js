@@ -26,7 +26,6 @@ SidebarView.prototype = {
         //input title and description into sidebar
         $(".title").html("<span class='clickable_title'>"+response.title+"</span>")
         $(".description").val(response.description);
-
       })
     }
   }

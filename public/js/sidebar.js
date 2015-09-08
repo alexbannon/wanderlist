@@ -7,6 +7,8 @@ $(document).ready(function(){
   $(".leaflet-tile-pane").on("click", savePinAndHide)
 
   function savePinAndHide() {
+    //prevent doubling of next arrow and trash event listeners
+    $(".glyphicon-trash").unbind()
     $(".next_arrow").unbind();
     $(".previous_arrow").unbind();
     //prevent blank title saves
@@ -41,9 +43,13 @@ $(document).ready(function(){
   }
 
   //show sidebar
+  $(".leaflet-marker-pane").on("click", showAndRenderSidebar);
+
   function showAndRenderSidebar(){
+    //prevent doubling of next arrow and trash event listeners
     $(".next_arrow").unbind();
     $(".previous_arrow").unbind();
+    $(".glyphicon-trash").unbind()
     whichPin = $(event.target);
     var temp = event.target.title.split(" id")
     var pinId = temp[1]
@@ -52,10 +58,11 @@ $(document).ready(function(){
     var sidebarView = new SidebarView(pinId)
     sidebarView.render()
 
+
     //for non-new pins, add trash and render photos
     if(pinId != "?"){
       console.log("not a question mark")
-      $(".glyphicon-trash").on("click", function(){
+      $(".glyphicon-trash").one("click", function(){
         Pin.deletePin(pinId, whichPin)
         $(".popup_bar").hide();
       })
@@ -63,7 +70,7 @@ $(document).ready(function(){
       showAndRenderPhotos(pinId)
     }
     else {
-      $(".glyphicon-trash").on("click", function(){
+      $(".glyphicon-trash").one("click", function(){
         whichPin.hide();
         $(".popup_bar").hide();
       })
@@ -76,6 +83,8 @@ $(document).ready(function(){
       // next and prev index of array of photos stored in hidden div
       $(".next_arrow").on("click", renderNextPhoto)
       $(".previous_arrow").on("click", renderPreviousPhoto)
+      //make title editable -- placing here because it needed to come after all ajax calls for title and photos
+      $(".clickable_title").one("click", switchTitle);
       function renderNextPhoto(){
         var nextNumber = parseInt($("#nextNumber").html())
         photoListView.renderOne(nextNumber)
@@ -91,9 +100,6 @@ $(document).ready(function(){
     })
 
   }
-
-  //run function on marker click
-  $(".leaflet-marker-pane").on("click", showAndRenderSidebar);
 
   //editable title
   function switchTitle(){
@@ -117,7 +123,6 @@ $(document).ready(function(){
     })
   }
 
-  $(".clickable_title").one("click", switchTitle);
 
   //save new pin
   $(".saveButton").on("click", function() {
