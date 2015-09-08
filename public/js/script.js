@@ -2,10 +2,17 @@ $(document).ready(function() {
 
 //this page loads pins, the functionality for the nav bar pins, and search bar
 
+//declutter global namespace with App object
+App = {
+  Markers: [],
+  current_latitude: null,
+  current_longitude: null,
+  current_user: null
+}
 
 //define current_user variable through ajax
 Pin.whichUser().then(function(userId){
-  current_user = userId;
+  App.current_user = userId;
 })
 
 
@@ -36,12 +43,12 @@ Pin.whichUser().then(function(userId){
 
   Pin.fetch().then(function(pins){
     pins.forEach(function(pin){
-      var marker = new MarkerView(pin);
-      if( marker.pin.isRed == "t"){
-        WorldMap.renderMarker(marker)
+      var markerView = new MarkerView(pin);
+      if( markerView.pin.isRed == "t"){
+        WorldMap.renderMarker(markerView)
       }
       else{
-        WorldMap.renderGreenMarker(marker)
+        WorldMap.renderGreenMarker(markerView)
       }
       //WorldMap.renderMarker(marker)
       // WorldMap.renderMarker(view.marker)
@@ -67,12 +74,12 @@ Pin.whichUser().then(function(userId){
             "latitude": lat,
             "longitude": long,
           })
-          current_latitude = lat;
-          current_longitude = long;
+          App.current_latitude = lat;
+          App.current_longitude = long;
 
           var marker = new MarkerView(pin);
           WorldMap.renderMarker(marker)
-          WorldMap.map.setView([current_latitude, current_longitude], 6)
+          WorldMap.map.setView([App.current_latitude, App.current_longitude], 6)
         }
       }).fail(function(response){
         console.log("failed to load coordinates from search");
@@ -88,18 +95,18 @@ Pin.whichUser().then(function(userId){
     var markerView = new MarkerView(pin);
     pinIsRed = "t";
     WorldMap.renderMarker(markerView);
-    current_latitude = 13.5333;
-    current_longitude = 2.0833;
-    WorldMap.map.setView([current_latitude, 50], 2)
+    App.current_latitude = 13.5333;
+    App.current_longitude = 2.0833;
+    WorldMap.map.setView([App.current_latitude, 50], 2)
   });
   $("#greenPinBtn").click(function() {
     var pin = new Pin({"isRed": "false"})
     var markerView = new MarkerView(pin);
     WorldMap.renderGreenMarker(markerView);
     pinIsRed = "f";
-    current_latitude = 13.5333;
-    current_longitude = 2.0833;
-    WorldMap.map.setView([current_latitude, 50], 2)
+    App.current_latitude = 13.5333;
+    App.current_longitude = 2.0833;
+    WorldMap.map.setView([App.current_latitude, 50], 2)
   });
 
 })

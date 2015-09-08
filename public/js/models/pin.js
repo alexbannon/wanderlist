@@ -3,7 +3,7 @@ var Pin = function(info){
   this.title = info.title || "New Pin!";
   this.latitude = info.latitude || 13.5333;
   this.longitude = info.longitude || 2.0833;
-  this.userId = info.userId || current_user;
+  this.userId = info.userId || App.current_user;
   this.isRed = info.isRed || "t";
   this.description = info.description || "What is on the agenda...";
 };
@@ -88,15 +88,15 @@ Pin.savePin = function(pinId, data){
 Pin.newPin = function(){
   var data = {};
   data["title"] = $(".title").children().eq(0).val()
-  data["latitude"] = current_latitude;
-  data["longitude"] = current_longitude;
+  data["latitude"] = App.current_latitude;
+  data["longitude"] = App.current_longitude;
   data["isRed"] = pinIsRed;
   data["description"] = $(".description").val()
-  data["userId"] = current_user
+  data["userId"] = App.current_user
   console.log(data)
   $.ajax({
     //current user defined on page load off oauth
-    url: "/users/"+current_user+"/pins",
+    url: "/users/"+App.current_user+"/pins",
     type: "POST",
     dataType: "json",
     data: data
@@ -126,4 +126,14 @@ Pin.deletePin = function(pinId){
     return response;
   })
   return request;
+}
+
+Pin.getLatLong = function(pinId){
+  App.Markers.forEach(function(MarkerView){
+    if(MarkerView.pin.id == pinId){
+      var markerView = MarkerView
+      App.current_latitude = MarkerView.marker._latlng.lat
+      App.current_longitude = MarkerView.marker._latlng.lng
+    }
+  })
 }

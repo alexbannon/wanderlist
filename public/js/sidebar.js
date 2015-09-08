@@ -27,6 +27,9 @@ $(document).ready(function(){
       $(".popup_bar").hide();
       return
     }
+    Pin.getLatLong(pinId)
+    data["latitude"] = App.current_latitude
+    data["longitude"] = App.current_longitude
 
     var description = $(".editbox").val();
     data["description"] = description;
@@ -46,6 +49,7 @@ $(document).ready(function(){
   $(".leaflet-marker-pane").on("click", showAndRenderSidebar);
 
   function showAndRenderSidebar(){
+    console.log(App.Markers)
     //prevent doubling of next arrow and trash event listeners
     $(".next_arrow").unbind();
     $(".previous_arrow").unbind();
