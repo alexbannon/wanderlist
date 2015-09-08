@@ -49,7 +49,7 @@ $(document).ready(function(){
   //show sidebar
   $(".leaflet-marker-pane").on("click", showAndRenderSidebar);
 
-  function showAndRenderSidebar(){
+  function showAndRenderSidebar(event){
     console.log(App.Markers)
     //prevent doubling of next arrow and trash event listeners
     $(".next_arrow").unbind();
