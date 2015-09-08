@@ -10,7 +10,7 @@ SidebarView.prototype = {
       $(".saveButton").show()
       $(".next_arrow").hide();
       $(".previous_arrow").hide();
-      $(".photos").html("<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='To Add Photo: Copy URL, Hit Enter' class='changeUrl'></div>")
+      $(".photos").html("<img class='changePhotoToOpaque' src='http://www.backpaco.com/wp-content/uploads/2015/04/yosemite-park.jpg'><div class='changeUrlBar'><input type='text' placeholder='To Add Photo: Paste URL, Hit Enter' class='changeUrl'></div>")
       $(".title").html("<input type='text' placeholder='New Pin'>");
       $(".description").val("What is on the agenda?")
     }
