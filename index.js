@@ -1,4 +1,5 @@
 var express = require("express");
+var favicon = require('serve-favicon');
 var app = express();
 var bodyParser = require("body-parser");
 var path = require("path");
@@ -6,6 +7,7 @@ var session = require("express-session");
 app.use(session({
   secret: "keyboard cat"
 }))
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 var Connection = require("./db/connection");
 var pg = require('pg');
@@ -13,14 +15,11 @@ var db = require("./db/connection");
 var fs = require("fs")
 
 pg.connect(process.env.DATABASE_URL, function(err, client) {
-  console.log(process.env.DATABASE_URL);
   if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
 
   client
     .query('SELECT table_schema,table_name FROM information_schema.tables;')
     .on('row', function(row) {
-      // console.log(JSON.stringify(row));
     });
 });
 
@@ -33,7 +32,6 @@ app.use("/public", express.static(path.join(__dirname + "/public")));
 app.set("view engine", "hbs");
 
 if (fs.existsSync("./env.js")){
-  console.log("yes")
   var env = require("./env");
 }
 else {
@@ -99,18 +97,11 @@ app.get("/auth/twitter/login", passport.authenticate("twitter"));
 app.get("/auth/twitter/callback",
   passport.authenticate("twitter", { failureRedirect: "/login" }),
   function(req, res) {
-    // console.log(req.session)
-    // console.log(req.session.passport.user.id)
-    // console.log("HELLLLLOOOOOOOOOO")
-    console.log("------------------------------------------------")
-    console.log("req.session.passport.user.id: "+req.session.passport.user.id)
-    console.log("------------------------------------------------")
     User.find({
       where: {
         "twitter_id": req.session.passport.user.id
       }
     }).then(function(user){
-      console.log(user);
       if(!user){
         User.create({
           twitter_id: req.session.passport.user.id
@@ -120,7 +111,6 @@ app.get("/auth/twitter/callback",
         });
       }
       else {
-        console.log("user already exists")
         userId = user.id
         return user;
       }

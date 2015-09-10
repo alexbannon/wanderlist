@@ -50,7 +50,6 @@ $(document).ready(function(){
   $(".leaflet-marker-pane").on("click", showAndRenderSidebar);
 
   function showAndRenderSidebar(event){
-    console.log(App.Markers)
     //prevent doubling of next arrow and trash event listeners
     $(".next_arrow").unbind();
     $(".previous_arrow").unbind();
@@ -58,7 +57,6 @@ $(document).ready(function(){
     whichPin = $(event.target);
     var temp = event.target.title.split(" id")
     var pinId = temp[1]
-    console.log(pinId)
 
     var sidebarView = new SidebarView(pinId)
     sidebarView.render()
@@ -66,7 +64,6 @@ $(document).ready(function(){
 
     //for non-new pins, add trash and render photos
     if(pinId != "?"){
-      console.log("not a question mark")
       $(".glyphicon-trash").one("click", function(){
         Pin.deletePin(pinId, whichPin)
         $(".popup_bar").hide();
@@ -112,7 +109,6 @@ $(document).ready(function(){
     $(".clickable_title").html("<input class='editTitle' type='text' value='"+value+"'>")
     $(".editTitle").on("keypress", function(e){
       if(e.which == 13){
-        console.log("enter pressed")
         var value = $(".editTitle").val();
         $(".clickable_title").html(value)
       }

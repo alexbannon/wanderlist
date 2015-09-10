@@ -29,13 +29,13 @@
     "passport-twitter": "^1.0.3",
     "pg": "^4.4.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.6.0"
+    "sequelize": "^3.6.0",
+    "serve-favicon": "^2.3.0"
   },
   "engines": {
     "node": "0.12.x"
   },
   "production": {
-  "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "DATABASE_URL"
   }
-
 }

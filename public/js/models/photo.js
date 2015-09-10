@@ -10,10 +10,7 @@ var Photo = function(pinId, photoId){
 Photo.savePhotos = function(listView, pinId){
   var views = listView.views
   views.pop()
-  if(views.length == 0){
-    console.log("nothing to do")
-  }
-  else{
+  if(views.length != 0){
     views.forEach(function(photoView){
       $.ajax({
         url: "/pins/"+pinId+"/photos",
