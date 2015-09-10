@@ -98,8 +98,6 @@ Pin.whichUser().then(function(userId){
     })
     $(".search_bar").val("")
     pinIsRed = "t";
-    $(".submit_button").attr("disabled", "disabled");
-    $(".submit_button").attr("disabled", "enabled");
 
     // showAndRenderSidebar()
   }
