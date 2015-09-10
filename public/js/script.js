@@ -60,35 +60,49 @@ Pin.whichUser().then(function(userId){
   $(".search_bar").on("keypress", function(e){
     if(e.which == 13){
       e.preventDefault();
-      var user_search = $(".form-control").val()
-      var request = $.getJSON("https://api.mapbox.com/v4/geocode/mapbox.places/"+user_search+".json?access_token=pk.eyJ1IjoiYWxleGJhbm5vbiIsImEiOiIzM2I3MWU4NjhlNjc5ODYzN2NjMWFhYzU4OWIzOGYzYiJ9.zVY-I01f5Pie1XCaA0Laog")
-      .then(function(response){
-        if(response.features.length == 0){
-          $(".search_bar").val("Location Not Found");
-        }
-        else {
-          var search_location = response.features[0].geometry.coordinates
-          var lat = search_location[1];
-          var long = search_location[0];
-          var pin = new Pin({
-            "latitude": lat,
-            "longitude": long,
-          })
-          App.current_latitude = lat;
-          App.current_longitude = long;
-
-          var marker = new MarkerView(pin);
-          WorldMap.renderMarker(marker)
-          WorldMap.map.setView([App.current_latitude, App.current_longitude], 6)
-        }
-      }).fail(function(response){
-        console.log("failed to load coordinates from search");
-      })
-      $(".search_bar").val("")
-      pinIsRed = "t";
-      // showAndRenderSidebar()
+      searchAndAddPin();
     }
   })
+  $(".submit_button").on("click", function(e){
+    e.preventDefault();
+    searchAndAddPin();
+  })
+
+  function searchAndAddPin(){
+    var user_search = $(".form-control").val()
+    if(!user_search || user_search == ""){
+      return
+    }
+    var request = $.getJSON("https://api.mapbox.com/v4/geocode/mapbox.places/"+user_search+".json?access_token=pk.eyJ1IjoiYWxleGJhbm5vbiIsImEiOiIzM2I3MWU4NjhlNjc5ODYzN2NjMWFhYzU4OWIzOGYzYiJ9.zVY-I01f5Pie1XCaA0Laog")
+    .then(function(response){
+      if(response.features.length == 0){
+        $(".search_bar").val("Location Not Found");
+      }
+      else {
+        var search_location = response.features[0].geometry.coordinates
+        var lat = search_location[1];
+        var long = search_location[0];
+        var pin = new Pin({
+          "latitude": lat,
+          "longitude": long,
+        })
+        App.current_latitude = lat;
+        App.current_longitude = long;
+
+        var marker = new MarkerView(pin);
+        WorldMap.renderMarker(marker)
+        WorldMap.map.setView([App.current_latitude, App.current_longitude], 6)
+      }
+    }).fail(function(response){
+      console.log("failed to load coordinates from search");
+    })
+    $(".search_bar").val("")
+    pinIsRed = "t";
+    $(".submit_button").attr("disabled", "disabled");
+    $(".submit_button").attr("disabled", "enabled");
+
+    // showAndRenderSidebar()
+  }
 
   $("#redPinBtn").click(function(){
     var pin = new Pin({})
