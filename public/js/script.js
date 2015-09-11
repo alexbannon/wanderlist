@@ -60,20 +60,30 @@ Pin.whichUser().then(function(userId){
   })
 
   //  add search bar functionality to add red pin
+  // bootstrap has uglified this all major time -
+  // Next step would be to remove bootstrap altogether from site.
 
   $(".search_bar").on("keypress", function(e){
     if(e.which == 13){
+      var user_search = $(".form-control").val()
       e.preventDefault();
-      searchAndAddPin();
+      searchAndAddPin(user_search);
+    }
+  })
+  $(".another_search_bar").on("keypress", function(e){
+    if(e.which == 13){
+      var user_search = $(".another_search_bar").val()
+      e.preventDefault();
+      searchAndAddPin(user_search);
     }
   })
   $(".submit_button").on("click", function(e){
+    var user_search = $(".form-control").val()
     e.preventDefault();
-    searchAndAddPin();
+    searchAndAddPin(user_search);
   })
 
-  function searchAndAddPin(){
-    var user_search = $(".form-control").val()
+  function searchAndAddPin(user_search){
     if(!user_search || user_search == ""){
       return
     }
@@ -124,5 +134,23 @@ Pin.whichUser().then(function(userId){
     App.current_longitude = 2.0833;
     WorldMap.map.setView([App.current_latitude, 50], 2)
   });
+  $(".anotherRedPinBtn").click(function(){
+    var pin = new Pin({})
+    var markerView = new MarkerView(pin);
+    pinIsRed = "t";
+    WorldMap.renderMarker(markerView);
+    App.current_latitude = 13.5333;
+    App.current_longitude = 2.0833;
+    WorldMap.map.setView([App.current_latitude, 50], 2)
+  })
+  $(".anotherGreenPinBtn").click(function(){
+    var pin = new Pin({"isRed": "false"})
+    var markerView = new MarkerView(pin);
+    WorldMap.renderGreenMarker(markerView);
+    pinIsRed = "f";
+    App.current_latitude = 13.5333;
+    App.current_longitude = 2.0833;
+    WorldMap.map.setView([App.current_latitude, 50], 2)
+  })
 
 })

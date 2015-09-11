@@ -93,20 +93,26 @@
     </div>
   </div>
   </nav>
-  <div id="dropdown_hidden" style="display:none">
-    <button type="button" class="btn btn-default btn-lg" id="greenPinBtn" style="margin-left:40%;margin-top:5px">
+  <div id="dropdown_hidden">
+    {{#if user}}
+      <a href="/signout" class="sign-out" style="text-decoration:none;margin-left:40%;margin-top:15px">sign out</a>
+    {{else}}
+      <a href="/auth/twitter/login" style="text-decoration:none;margin-left:25%;top:15px">Sign <i class="fa fa-twitter"></i> In</a>
+    {{/if}}
+    <button type="button" class="btn btn-default btn-lg anotherGreenPinBtn" style="margin-left:15%;margin-top:5px">
       <i class="fa fa-map-pin green"></i>
     </button>
-    <button type="button" class="btn btn-default btn-lg" id="redPinBtn" style="margin-top:5px">
+    <button type="button" class="btn btn-default btn-lg anotherRedPinBtn" style="margin-top:5px">
       <i class="fa fa-map-pin red"></i>
     </button>
-    <button type="button" class="btn btn-default btn-lg" id="helpdesk" style="margin-top:5px">
+    <button type="button" class="btn btn-default btn-lg anotherHelpdesk" style="margin-top:5px">
       <i class="fa fa-question-circle"></i>
     </button>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control search_bar" placeholder="destination">
+        <input type="text" class="form-control another_search_bar" placeholder="Enter a Destination">
       </div>
+      <button type="submit" class="btn btn-default submit_button" style="color:green;display:none">search</button>
     </form>
 
   </div>
