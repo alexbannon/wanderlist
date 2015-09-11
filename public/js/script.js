@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  //fix bootstrap glitch
+  $(".navbar-toggle").on("click", function(){
+    $("#dropdown_hidden").toggle();
+  })
 
 //this page loads pins, the functionality for the nav bar pins, and search bar
 

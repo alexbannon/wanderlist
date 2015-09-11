@@ -261,3 +261,9 @@ input.descrip{
 .fa-twitter {
   color: #55acee;
 }
+
+@media (min-width: 768px){
+  #dropdown_hidden {
+    display: none;
+  }
+}

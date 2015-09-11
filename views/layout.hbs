@@ -79,20 +79,37 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <button type="button" class="btn btn-default btn-lg" id="greenPinBtn">
-            <i class="fa fa-map-pin green"></i>
+            <i class="fa fa-map-pin green"></i></button>
         </li>
         <li>
           <button type="button" class="btn btn-default btn-lg" id="redPinBtn">
-            <i class="fa fa-map-pin red"></i>
+            <i class="fa fa-map-pin red"></i></button>
         </li>
         <li>
           <button type="button" class="btn btn-default btn-lg" id="helpdesk">
-        <i class="fa fa-question-circle"></i>
+        <i class="fa fa-question-circle"></i></button>
         </li>
       </ul>
     </div>
   </div>
   </nav>
+  <div id="dropdown_hidden" style="display:none">
+    <button type="button" class="btn btn-default btn-lg" id="greenPinBtn" style="margin-left:40%;margin-top:5px">
+      <i class="fa fa-map-pin green"></i>
+    </button>
+    <button type="button" class="btn btn-default btn-lg" id="redPinBtn" style="margin-top:5px">
+      <i class="fa fa-map-pin red"></i>
+    </button>
+    <button type="button" class="btn btn-default btn-lg" id="helpdesk" style="margin-top:5px">
+      <i class="fa fa-question-circle"></i>
+    </button>
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control search_bar" placeholder="destination">
+      </div>
+    </form>
+
+  </div>
   <!-- make a dropdown div and then toggle display on click of $(".navbar-toggle") -->
   {{{ body }}}
 
