@@ -1,5 +1,5 @@
 # WanderList
-The WanderList is an interactive pinboard where users can share their adventures and desired trips. Users can drop red pins for places that they want to go and green pins for the places that they've been. Clicking on a pin opens a sidebar where details about the users trips can be added, including photos and notes.
+The WanderList is an interactive pinboard where users can share their adventures and desired trips. Users can drop red pins for places that they want to go and green pins for the places that they've been. Clicking on a pin opens a sidebar where details about the users trips can be added, including photos and notes. Deployed on Heroku at: http://wander-list.herokuapp.com
 
 ### Collaborators
 - Alex Bannon: https://github.com/alexbannon
