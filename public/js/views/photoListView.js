@@ -36,7 +36,8 @@ PhotoListView.prototype = {
     var self = this;
     $(".photos").html(self.views[number].html)
     //for icebox: dropdown on each page to edit/delete photo
-    $("#currentPhotoId").html(self.views[number].photoId)
+    // $("#currentPhotoId").html(self.views[number].photoId)
+    $("#currentPhotoId").html(number)
 
     if (parseInt(number) == (self.views.length - 1)){
       $(".next_arrow").hide();

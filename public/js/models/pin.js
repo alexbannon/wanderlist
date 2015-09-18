@@ -93,7 +93,6 @@ Pin.newPin = function(){
   data["isRed"] = pinIsRed;
   data["description"] = $(".description").val()
   data["userId"] = App.current_user
-  console.log(data)
   var request = $.ajax({
     //current user defined on page load off oauth
     url: "/users/"+App.current_user+"/pins",

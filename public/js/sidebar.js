@@ -75,13 +75,14 @@ $(document).ready(function(){
         $(".popup_bar").hide();
       })
     }
-    showAndRenderPhotos(pinId)
+    App.showAndRenderPhotos(pinId)
 
   }
-
-  function showAndRenderPhotos(pinId){
+  App.showAndRenderPhotos = function(pinId){
     App.photoListView = new PhotoListView()
     App.photoListView.renderAll(pinId).done(function(response){
+      $(".next_arrow").off()
+      $(".previous_arrow").off()
       // next and prev index of array of photos stored in hidden div
       $(".next_arrow").on("click", renderNextPhoto)
       $(".previous_arrow").on("click", renderPreviousPhoto)
@@ -130,7 +131,6 @@ $(document).ready(function(){
     Pin.newPin().then(function(response){
       $("#pinId").html(response.id)
       Photo.savePhotos(App.photoListView, response.id)
-      showAndRenderPhotos(response.id)
     })
   })
 

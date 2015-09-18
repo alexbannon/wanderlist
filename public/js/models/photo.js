@@ -11,6 +11,7 @@ Photo.savePhotos = function(listView, pinId){
   var views = listView.views
   views.pop()
   if(views.length != 0){
+    var counter = 0;
     views.forEach(function(photoView){
       $.ajax({
         url: "/pins/"+pinId+"/photos",
@@ -21,7 +22,13 @@ Photo.savePhotos = function(listView, pinId){
           pinId: pinId
         }
       }).done(function(response){
+        counter++
+        if(counter == views.length){
+          App.showAndRenderPhotos(pinId)
+        }
         return
+        // if counter == views.length
+        //render photoListView
       })
     })
   }
